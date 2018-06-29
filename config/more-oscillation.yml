@@ -1,0 +1,40 @@
+#Python用
+python: |
+    #定数
+    number_of_hidden_nodes = 50 #隠れ層のノード数
+    number_of_data = 101 #データの分割数
+    I = 601
+    J = 601
+    Delta_a = 60.0 / (I - 1)
+    Delta_b = 60.0 / (J - 1)
+    N = 201
+    Delta_x = 2.0 / (N - 1)
+    
+    #学習すべき関数
+    def f(x):
+        return -x * np.sin(1/((0.1*x)**2 + 0.01))
+
+#Octave用
+octave: |
+    I = 601;
+    J = 601;
+    Delta_a = 60.0 / (I - 1);
+    Delta_b = 60.0 / (J - 1);
+    a = linspace(-30, 30, I);
+    b = linspace(-30, 30, J);
+    
+    N = 201;
+    Delta_x = 2.0 / (N - 1);
+    x = linspace(-1, 1, N);
+    
+    function r = f(x)
+    	r = -x .* sin(1 ./ ((0.1 * x) .^ 2 + 0.01));
+    endfunction
+    
+    function r = psi(x)
+        r = (2 .* x .* (x.^2 - 3) .* dawson(x ./ sqrt(2)) .- sqrt(2) .* (x.^2 - 2)) ./ pi^2;
+    endfunction
+
+#Gnuplot用
+gnuplot: '-x * sin(1/((0.1*x)**2 + 0.01))'
+
